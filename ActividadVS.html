@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Guatape - Tarjeta de Presentacion</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .galeria {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .galeria.seccion {
+      margin-bottom: 20px;
+    }
+
+    .galeria img {
+      width: 45%;
+      margin: 2%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .boton {
+      display: inline-block;
+      margin: 10px 5px 0;
+      padding: 10px 20px;
+      background-color: #333333;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .boton:hover {
+      background-color: #555555;
+    }
+
+    /* ANIMACIONES SUAVES */
+    .actividad-info,
+    .mas-info {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+    }
+
+    .actividad-info.mostrar,
+    .mas-info.mostrar {
+      max-height: 500px; /* Puedes ajustar este valor */
+      opacity: 1;
+    }
+
+    @media (max-width: 600px) {
+      .galeria img {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="tarjeta">
+      <img src="C:\Users\Usuario\OneDrive\Imágenes\penol.jpeg" alt="Imagen del Penol en Guatape">
+      <article>
+        <h2>Guatape 🏞️</h2>
+        <p class="descripcion">
+          Guatape es un hermoso municipio de Colombia, famoso por su icónico monolito, el Peñol, 
+          y su vibrante arquitectura colonial llena de colores y zócalos decorativos.
+        </p>
+
+        <!-- BOTÓN Y GALERÍA -->
+        <a href="#" class="boton" onclick="toggleGaleria()">Ver más imágenes</a>
+        <div id="galeria" class="galeria">
+          <div class="seccion">
+            <h3>Senderismo</h3>
+            <img src="C:\Users\Usuario\OneDrive\Imágenes\SenderismoPueblo.jpg" alt="Senderismo 1">
+            <img src="C:\Users\Usuario\OneDrive\Imágenes\Guatape-2.jpg" alt="Senderismo 2">
+          </div>
+          <div class="seccion">
+            <h3>Buceo</h3>
+            <img src="C:\Users\Usuario\OneDrive\Imágenes\BuceoGuata.jpg" alt="Buceo 1">
+            <img src="C:\Users\Usuario\OneDrive\Imágenes\BuceGuata.jpg" alt="Buceo 2">
+          </div>
+        </div>
+
+        <!-- INFO PRINCIPAL -->
+        <div class="info">
+          <p><strong>Ubicacion:</strong> Antioquia, Colombia</p>
+          <p><strong>Clima:</strong> Cálido con lluvias ocasionales</p>
+          <p><strong>Actividades:</strong></p>
+          <ul>
+            <li>Natacion <a href="#" class="boton" onclick="toggleActividad('natacion-info', event)">Ver más</a></li>
+            <div id="natacion-info" class="actividad-info">
+              <p>Disfruta de aguas tranquilas en embalses y lagunas, ideales para nadar de forma segura.</p>
+            </div>
+            <li>Buceo <a href="#" class="boton" onclick="toggleActividad('buceo-info', event)">Ver más</a></li>
+            <div id="buceo-info" class="actividad-info">
+              <p>Explora el fondo acuático del embalse, hogar de estructuras sumergidas y vida marina.</p>
+            </div>
+            <li>Pesca <a href="#" class="boton" onclick="toggleActividad('pesca-info', event)">Ver más</a></li>
+            <div id="pesca-info" class="actividad-info">
+              <p>Participa en la pesca artesanal y deportiva en los numerosos cuerpos de agua de la región.</p>
+            </div>
+            <li>Senderismo <a href="#" class="boton" onclick="toggleActividad('senderismo-info', event)">Ver más</a></li>
+            <div id="senderismo-info" class="actividad-info">
+              <p>Recorre senderos naturales y empinados con vistas panorámicas del Peñol y el embalse.</p>
+            </div>
+          </ul>
+        </div>
+
+        <!-- BOTONES ADICIONALES -->
+        <a href="#" class="boton" onclick="toggleInfo()">Ver más</a>
+        <a href="https://www.tiempo.com/guatape.htm" class="boton" target="_blank">Ver Clima</a>
+
+        <!-- INFORMACIÓN EXTRA -->
+        <div id="mas-info" class="mas-info">
+          <p><strong>Historia:</strong> Guatapé se fundó durante la época colonial y ha evolucionado a través del tiempo conservando tradiciones y una arquitectura colorida que lo hace único.</p>
+          <p><strong>Cultura:</strong> La cultura local se refleja en festivales, música, gastronomía y tradiciones que se celebran año tras año, invitando a locales y visitantes a disfrutar de su vibrante ambiente.</p>
+          <p><strong>Atracciones:</strong> Además del impresionante Peñol, el pueblo ofrece paseos en lancha, excursiones a miradores y senderos en contacto con la naturaleza, ideales para los amantes del ecoturismo.</p>
+          <p><strong>Recomendaciones:</strong> Visitar Guatapé durante la temporada seca garantiza una experiencia inolvidable, con eventos y ferias que realzan la esencia cultural de este mágico lugar.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    function toggleInfo() {
+      const infoDiv = document.getElementById("mas-info");
+      infoDiv.classList.toggle("mostrar");
+      const boton = event.target;
+      boton.textContent = infoDiv.classList.contains("mostrar") ? "Ver menos" : "Ver más";
+    }
+
+    function toggleActividad(id, event) {
+      event.preventDefault();
+      const div = document.getElementById(id);
+      div.classList.toggle("mostrar");
+      const btn = event.target;
+      btn.textContent = div.classList.contains("mostrar") ? "Ver menos" : "Ver más";
+    }
+
+    function toggleGaleria() {
+      const galeria = document.getElementById("galeria");
+      const btn = event.target;
+      if (galeria.style.display === "none" || galeria.style.display === "") {
+        galeria.style.display = "block";
+        btn.textContent = "Ver menos imágenes";
+      } else {
+        galeria.style.display = "none";
+        btn.textContent = "Ver más imágenes";
+      }
+    }
+  </script>
+</body>
+</html>
